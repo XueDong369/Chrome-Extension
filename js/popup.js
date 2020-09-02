@@ -24,33 +24,6 @@ $('#get_background_title').click(e => {
 	alert(bg.document.title);
 });
 
-// 自定义窗体大小
-$('#custom_window_size').click(() => {
-	chrome.windows.getCurrent({}, (currentWindow) => {
-		var startLeft = 10;
-		chrome.windows.update(currentWindow.id, 
-		{
-			left: startLeft * 10,
-			top: 100,
-			width: 800,
-			height: 600
-		});
-		var inteval = setInterval(() => {
-			if(startLeft >= 40) clearInterval(inteval);
-			chrome.windows.update(currentWindow.id, {left: (++startLeft) * 10});
-		}, 50);
-	});
-});
-
-// 最大化窗口
-$('#max_current_window').click(() => {
-	chrome.windows.getCurrent({}, (currentWindow) => {
-		// state: 可选 'minimized', 'maximized' and 'fullscreen' 
-		chrome.windows.update(currentWindow.id, {state: 'maximized'});
-	});
-});
-
-
 // 最小化窗口
 $('#min_current_window').click(() => {
 	chrome.windows.getCurrent({}, (currentWindow) => {
@@ -79,7 +52,7 @@ $('#open_url_new_tab').click(() => {
 // 当前标签打开网页
 $('#open_url_current_tab').click(() => {
 	getCurrentTabId(tabId => {
-		chrome.tabs.update(tabId, {url: 'http://www.so.com'});
+		chrome.tabs.update(tabId, {url: 'http://www.baidu.com'});
 	});
 });
 
@@ -197,9 +170,9 @@ $('#show_notification').click(e => {
 	chrome.notifications.create(null, {
 		type: 'image',
 		iconUrl: 'img/icon.png',
-		title: '祝福',
-		message: '骚年，祝你圣诞快乐！Merry christmas!',
-		imageUrl: 'img/sds.png'
+		title: 'Thanks',
+		message: '祝大家周末愉快！！！',
+		imageUrl: 'img/icon.png'
 	});
 });
 
