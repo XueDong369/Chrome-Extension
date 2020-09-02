@@ -84,19 +84,19 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 });
 
 // popup与content-script建立长连接
-$('#connect_to_content_script').click(() => {
-	getCurrentTabId((tabId) => {
-		let port = chrome.tabs.connect(tabId, {name: 'test-connect'});
-		port.postMessage({question: '你是谁啊？'});
-		port.onMessage.addListener(function(msg) {
-			alert('收到长连接消息：'+msg.answer);
-			if(msg.answer && msg.answer.startsWith('我是'))
-			{
-				port.postMessage({question: '哦，原来是你啊！'});
-			}
-		});
-	});
-});
+// $('#connect_to_content_script').click(() => {
+// 	getCurrentTabId((tabId) => {
+// 		let port = chrome.tabs.connect(tabId, {name: 'test-connect'});
+// 		port.postMessage({question: '你是谁啊？'});
+// 		port.onMessage.addListener(function(msg) {
+// 			alert('收到长连接消息：'+msg.answer);
+// 			if(msg.answer && msg.answer.startsWith('我是'))
+// 			{
+// 				port.postMessage({question: '哦，原来是你啊！'});
+// 			}
+// 		});
+// 	});
+// });
 
 // 获取当前选项卡ID
 function getCurrentTabId(callback)

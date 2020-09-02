@@ -93,7 +93,7 @@ function injectCustomJs(jsPath)
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
 	console.log('收到来自 ' + (sender.tab ? "content-script(" + sender.tab.url + ")" : "popup或者background") + ' 的消息：', request);
-	if(request.cmd == 'update_font_size') {
+	if(request.cmd === 'update_font_size') {
 		let ele = document.createElement('style');
 		ele.innerHTML = `* {font-size: ${request.size}px !important;}`;
 		document.head.appendChild(ele);
@@ -115,11 +115,11 @@ function sendMessageToBackground(message) {
 // 监听长连接
 chrome.runtime.onConnect.addListener(function(port) {
 	console.log(port);
-	if(port.name == 'test-connect') {
+	if(port.name === 'test-connect') {
 		port.onMessage.addListener(function(msg) {
 			console.log('收到长连接消息：', msg);
 			tip('收到长连接消息：' + JSON.stringify(msg));
-			if(msg.question == '你是谁啊？') port.postMessage({answer: '我是你爸！'});
+			if(msg.question === '你是谁啊？') port.postMessage({answer: '我是你爸！'});
 		});
 	}
 });
@@ -127,10 +127,10 @@ chrome.runtime.onConnect.addListener(function(port) {
 window.addEventListener("message", function(e)
 {
 	console.log('收到消息：', e.data);
-	if(e.data && e.data.cmd == 'invoke') {
+	if(e.data && e.data.cmd === 'invoke') {
 		eval('('+e.data.code+')');
 	}
-	else if(e.data && e.data.cmd == 'message') {
+	else if(e.data && e.data.cmd === 'message') {
 		tip(e.data.data);
 	}
 }, false);
