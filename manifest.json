@@ -9,7 +9,7 @@
   "description": "插件demo描述",
   // 图标
   "icons": {
-    "28": "img/icon.png"
+    "24": "img/icon.png"
   },
   // 会一直常驻的后台JS或后台页面
   "background":

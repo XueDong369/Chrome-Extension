@@ -15,38 +15,9 @@ chrome.contextMenus.create({
     contexts: ['selection'], // 只有当选中文字时才会出现此右键菜单
     onclick: function(params)
     {
-        // 注意不能使用location.href，因为location是属于background的window对象
         chrome.tabs.create({url: 'https://www.baidu.com/s?ie=utf-8&wd=' + encodeURI(params.selectionText)});
     }
 });
-
-
-
-//-------------------- badge演示 ------------------------//
-/*(function()
-{
-	var showBadge = false;
-	var menuId = chrome.contextMenus.create({
-		title: '显示图标上的Badge',
-		type: 'checkbox',
-		checked: false,
-		onclick: function() {
-			if(!showBadge)
-			{
-				chrome.browserAction.setBadgeText({text: 'New'});
-				chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]});
-				chrome.contextMenus.update(menuId, {title: '隐藏图标上的Badge', checked: true});
-			}
-			else
-			{
-				chrome.browserAction.setBadgeText({text: ''});
-				chrome.browserAction.setBadgeBackgroundColor({color: [0, 0, 0, 0]});
-				chrome.contextMenus.update(menuId, {title: '显示图标上的Badge', checked: false});
-			}
-			showBadge = !showBadge;
-		}
-	});
-})();*/
 
 // 监听来自content-script的消息
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
@@ -64,7 +35,7 @@ $('#test_cors').click((e) => {
 });
 
 $('#get_popup_title').click(e => {
-    var views = chrome.extension.getViews({type:'popup'});
+    let views = chrome.extension.getViews({type:'popup'});
     if(views.length > 0) {
         alert(views[0].document.title);
     } else {
@@ -82,8 +53,7 @@ function getCurrentTabId(callback)
 }
 
 // 当前标签打开某个链接
-function openUrlCurrentTab(url)
-{
+function openUrlCurrentTab(url) {
     getCurrentTabId(tabId => {
         chrome.tabs.update(tabId, {url: url});
     })
@@ -126,7 +96,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
 chrome.omnibox.onInputEntered.addListener((text) => {
     console.log('inputEntered: ' + text);
     if(!text) return;
-    var href = '';
+    let href = '';
     if(text.endsWith('美女')) href = 'http://image.baidu.com/search/index?tn=baiduimage&ie=utf-8&word=' + text;
     else if(text.startsWith('百度搜索')) href = 'https://www.baidu.com/s?ie=UTF-8&wd=' + text.replace('百度搜索 ', '');
     else if(text.startsWith('谷歌搜索')) href = 'https://www.google.com.tw/search?q=' + text.replace('谷歌搜索 ', '');
@@ -140,7 +110,7 @@ function testBackground() {
 }
 
 // 是否显示图片
-var showImage;
+let showImage;
 chrome.storage.sync.get({showImage: true}, function(items) {
     showImage = items.showImage;
 });

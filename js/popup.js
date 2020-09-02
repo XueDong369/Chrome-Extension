@@ -1,7 +1,7 @@
 $(function() {
 
 	// 加载设置
-	var defaultConfig = {color: 'white'}; // 默认配置
+	let defaultConfig = {color: 'white'}; // 默认配置
 	chrome.storage.sync.get(defaultConfig, function(items) {
 		document.body.style.backgroundColor = items.color;
 	});
@@ -14,13 +14,13 @@ $('#open_background').click(e => {
 
 // 调用后台JS
 $('#invoke_background_js').click(e => {
-	var bg = chrome.extension.getBackgroundPage();
+	let bg = chrome.extension.getBackgroundPage();
 	bg.testBackground();
 });
 
 // 获取后台页标题
 $('#get_background_title').click(e => {
-	var bg = chrome.extension.getBackgroundPage();
+	let bg = chrome.extension.getBackgroundPage();
 	alert(bg.document.title);
 });
 
@@ -86,7 +86,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 // popup与content-script建立长连接
 $('#connect_to_content_script').click(() => {
 	getCurrentTabId((tabId) => {
-		var port = chrome.tabs.connect(tabId, {name: 'test-connect'});
+		let port = chrome.tabs.connect(tabId, {name: 'test-connect'});
 		port.postMessage({question: '你是谁啊？'});
 		port.onMessage.addListener(function(msg) {
 			alert('收到长连接消息：'+msg.answer);

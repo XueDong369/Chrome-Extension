@@ -6,24 +6,24 @@ document.addEventListener('DOMContentLoaded', function()
 	// 注入自定义JS
 	injectCustomJs();
 	// 给谷歌搜索结果的超链接增加 _target="blank"
-	if(location.host == 'www.google.com.tw')
+	if(location.host === 'www.google.com.tw')
 	{
-		var objs = document.querySelectorAll('h3.r a');
-		for(var i=0; i<objs.length; i++)
+		let objs = document.querySelectorAll('h3.r a');
+		for(let i=0; i<objs.length; i++)
 		{
 			objs[i].setAttribute('_target', 'blank');
 		}
 		console.log('已处理谷歌超链接！');
 	}
-	else if(location.host == 'www.baidu.com')
+	else if(location.host === 'www.baidu.com')
 	{
 		function fuckBaiduAD()
 		{
 			if(document.getElementById('my_custom_css')) return;
-			var temp = document.createElement('style');
+			let temp = document.createElement('style');
 			temp.id = 'my_custom_css';
 			(document.head || document.body).appendChild(temp);
-			var css = `
+			let css = `
 			/* 移除百度右侧广告 */
 			#content_right{display:none;}
 			/* 覆盖整个屏幕的相关推荐 */
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 function initCustomPanel()
 {
-	var panel = document.createElement('div');
+	let panel = document.createElement('div');
 	panel.className = 'chrome-plugin-demo-panel';
 	panel.innerHTML = `
 		<h2>injected-script操作content-script演示区：</h2>
@@ -77,7 +77,7 @@ function initCustomPanel()
 function injectCustomJs(jsPath)
 {
 	jsPath = jsPath || 'js/inject.js';
-	var temp = document.createElement('script');
+	let temp = document.createElement('script');
 	temp.setAttribute('type', 'text/javascript');
 	// 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js
 	temp.src = chrome.extension.getURL(jsPath);
@@ -94,7 +94,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
 	console.log('收到来自 ' + (sender.tab ? "content-script(" + sender.tab.url + ")" : "popup或者background") + ' 的消息：', request);
 	if(request.cmd == 'update_font_size') {
-		var ele = document.createElement('style');
+		let ele = document.createElement('style');
 		ele.innerHTML = `* {font-size: ${request.size}px !important;}`;
 		document.head.appendChild(ele);
 	}
@@ -137,7 +137,7 @@ window.addEventListener("message", function(e)
 
 
 function initCustomEventListen() {
-	var hiddenDiv = document.getElementById('myCustomEventDiv');
+	let hiddenDiv = document.getElementById('myCustomEventDiv');
 	if(!hiddenDiv) {
 		hiddenDiv = document.createElement('div');
 		hiddenDiv.style.display = 'none';
@@ -145,16 +145,16 @@ function initCustomEventListen() {
 		document.body.appendChild(hiddenDiv);
 	}
 	hiddenDiv.addEventListener('myCustomEvent', function() {
-		var eventData = document.getElementById('myCustomEventDiv').innerText;
+		let eventData = document.getElementById('myCustomEventDiv').innerText;
 		tip('收到自定义事件：' + eventData);
 	});
 }
 
-var tipCount = 0;
+let tipCount = 0;
 // 简单的消息通知
 function tip(info) {
 	info = info || '';
-	var ele = document.createElement('div');
+	let ele = document.createElement('div');
 	ele.className = 'chrome-plugin-simple-tip slideInLeft';
 	ele.style.top = tipCount * 70 + 20 + 'px';
 	ele.innerHTML = `<div>${info}</div>`;
