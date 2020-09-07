@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function()
 	// 注入自定义JS
 	injectCustomJs();
 	// 给谷歌搜索结果的超链接增加 _target="blank"
-	if(location.host === 'www.google.com.tw')
+	if(location.host === 'www.google.com')
 	{
 		let objs = document.querySelectorAll('h3.r a');
 		for(let i=0; i<objs.length; i++)
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function()
 			$('[data-tuiguang]').parents('[data-click]').remove();
 		}
 		fuckBaiduAD();
-		initCustomPanel();
+		// initCustomPanel();
 		initCustomEventListen();
 	}
 });

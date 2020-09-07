@@ -10,7 +10,7 @@
 document.getElementById('save').addEventListener('click', function() {
 	let color = document.getElementById('color').value;
 	let showImage = document.getElementById('show_image').checked;
-	// 这里貌似会存在刷新不及时的问题
+
 	chrome.extension.getBackgroundPage().showImage = showImage; // 让background即使生效
 	chrome.storage.sync.set({color: color, showImage: showImage}, function() {
 		// 注意新版的options页面alert不生效！

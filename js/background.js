@@ -69,7 +69,7 @@ function openUrlNewTab(url)
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
     console.log('inputChanged: ' + text);
     if(!text) return;
-    if(text == '美女') {
+    if(text === '美女') {
         suggest([
             {content: '中国' + text, description: '你要找“中国美女”吗？'},
             {content: '日本' + text, description: '你要找“日本美女”吗？'},
@@ -77,7 +77,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
             {content: '韩国' + text, description: '你要找“韩国美女”吗？'}
         ]);
     }
-    else if(text == '微博') {
+    else if(text === '微博') {
         suggest([
             {content: '新浪' + text, description: '新浪' + text},
             {content: '腾讯' + text, description: '腾讯' + text},

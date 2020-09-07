@@ -70,7 +70,7 @@ $('#highlight_tab').click(() => {
 
 // popup主动发消息给content-script
 $('#send_message_to_content_script').click(() => {
-	sendMessageToContentScript('你好，我是popup！', (response) => {
+	sendMessageToContentScript('你好，我是popup，祝大家周末愉快！！！', (response) => {
 		if(response) alert('收到来自content-script的回复：'+response);
 	});
 });
@@ -171,7 +171,7 @@ $('#show_notification').click(e => {
 		type: 'image',
 		iconUrl: 'img/icon.png',
 		title: 'Thanks',
-		message: '祝大家周末愉快！！！',
+		message: '你好，我是桌面通知！',
 		imageUrl: 'img/icon.png'
 	});
 });
